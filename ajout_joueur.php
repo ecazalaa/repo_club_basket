@@ -46,7 +46,7 @@ $contact = $query->fetch();
 
 if($contact)
 {
-    echo "Le contact existe déjà dans la base de données.";
+    echo "Le joueur existe déjà dans la base de données.";
 }
 else{
     ///Préparation de la requête
@@ -59,7 +59,7 @@ else{
         'taille' => $taille,
         'poids' => $poids));
 
-    echo "Le contact a été ajouté avec succès.";
+    echo "Le joueur a été ajouté avec succès.";
 }
 
 ?>
