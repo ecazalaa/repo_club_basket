@@ -38,4 +38,4 @@ if ($joueurExistant) {
 }
 ?>
 <br><br>
-<a href="saisie_joueur.html" class="button">retour</a>
+<a href="homePage.php" class="button">retour</a>

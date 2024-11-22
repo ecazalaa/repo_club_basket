@@ -126,6 +126,10 @@
 
 
 </form>
+
+<!-- Add a button to return to the homepage -->
+<a href="homePage.php" class="button">Retour à la page d'accueil</a>
+
 <br>
 <br>
 </body>
@@ -177,8 +181,8 @@ echo "<table border='1'>";
 
         // Ajouter les hyperliens pour modifier et supprimer le joueur
         echo "<td>";
-            echo '<a href="modifier.php?licence=' . urlencode($joueur['licence']) . '">Modifier |</a>';
-            echo '<a href="supprimer.php?licence=' . urlencode($joueur['licence']) . '">Supprimer</a>';
+            echo '<a href="modifier_joueur.php?licence=' . urlencode($joueur['licence']) . '">Modifier |</a>';
+            echo '<a href="supprimer_joueur.php?licence=' . urlencode($joueur['licence']) . '">Supprimer</a>';
             echo "</td>";
 
         echo "</tr>";
