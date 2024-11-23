@@ -1,3 +1,7 @@
+<?php
+require_once 'session/session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +33,7 @@
             display: flex;
             justify-content: center;
             background-color: #444;
-            margin-top: 50px; /* Adjust based on header height */
+            margin-top: 49px; /* Adjust based on header height */
             width: 100%;
             position: fixed;
             top: 50px; /* Adjust based on header height */
@@ -90,6 +94,23 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+        .logout-button {
+            background-color: #379153;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .logout-button:hover {
+            background-color: #296e3f;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +120,7 @@
 </header>
 
 <nav>
-    <a href="/club_basket/repo_club_basket/vue/saisie_joueur.html">Ajouter un Joueur</a>
+    <a href="saisie_joueur.php">Ajouter un Joueur</a>
     <a href="saisie_recherche_joueur.php">Rechercher un Joueur</a>
     <a href="contact.html">Contact</a>
 </nav>
@@ -116,6 +137,7 @@
 
 <footer>
     <p>&copy; 2024 Club de Basket Labège. Tous droits réservés.</p>
+    <a href="logout.php" class="logout-button">Se déconnecter</a>
 </footer>
 
 </body>

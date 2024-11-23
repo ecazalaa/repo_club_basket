@@ -136,6 +136,7 @@
 </html>
 
 <?php
+require_once 'session/session.php';
 require_once '../config/config.php';
 require_once '../modele/JoueurDAO.php';
 require_once '../controleur/RechercheJoueur.php';
@@ -151,11 +152,7 @@ $motcle = $_POST['cle'];
 if (isset($_POST['critere'])) {
 $critere = $_POST['critere'];
 }
-// autre méthode
-/*
-$motcle = isset($_POST['cle']) ? htmlspecialchars($_POST['cle']) : '';
-$critere = isset($_POST['critere']) ? $_POST['critere'] : '';
-*/
+
 $pdo = connectionBD();
 $joueurDAO = new JoueurDAO($pdo);
 
@@ -165,18 +162,20 @@ if (!empty($motcle) && !empty($critere)) {
 // Requête dynamique basée sur le critère choisi
     $recherche = new RechercheJoueur($joueurDAO, $critere,$motcle);
     $joueurs=$recherche->executer();
-
 // Vérifier s'il y a des résultats
 if (count($joueurs) > 0) {
 // Afficher les résultats dans un tableau HTML avec des liens de modification et suppression
 echo "<table border='1'>";
-    echo "<tr><th>Nom</th><th>Prénom</th><th>Numéro de licence</th><th>Actions</th></tr>";
+    echo "<tr><th>Nom</th><th>Prénom</th><th>Date de naissance</th><th>Taille</th><th>Poids</th><th>Numéro de licence</th><th>Actions</th></tr>";
 
     // Parcourir les résultats
     foreach ($joueurs as $joueur) {
     echo "<tr>";
         echo "<td>" . htmlspecialchars($joueur['nom']) . "</td>";
         echo "<td>" . htmlspecialchars($joueur['prenom']) . "</td>";
+        echo "<td>" . htmlspecialchars($joueur['date_naissance']) . "</td>";
+        echo "<td>" . htmlspecialchars($joueur['taille']) . "</td>";
+        echo "<td>" . htmlspecialchars($joueur['poids']) . "</td>";
         echo "<td>" . htmlspecialchars($joueur['licence']) . "</td>";
 
         // Ajouter les hyperliens pour modifier et supprimer le joueur

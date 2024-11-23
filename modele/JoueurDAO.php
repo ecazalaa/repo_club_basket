@@ -17,7 +17,7 @@ class JoueurDAO{
     }
 
     public function select($critere, $motcle){
-        $query = "SELECT nom, prenom, licence FROM club_basket.joueur WHERE $critere = :motcle";
+        $query = "SELECT nom, prenom,date_naissance,taille,poids,licence FROM club_basket.joueur WHERE $critere = :motcle";
         $req = $this->pdo->prepare($query);
         $req->execute(['motcle' => $motcle]);
         return $req->fetchAll(PDO::FETCH_ASSOC);

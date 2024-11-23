@@ -1,10 +1,14 @@
 <?php
+
+
+require_once 'session/session.php';
 require_once '../config/config.php';
 require_once '../modele/JoueurDAO.php';
-
+require_once '../controleur/ObtenirTousLesJoueurs.php';
 $pdo = connectionBD();
 $joueurDAO = new JoueurDAO($pdo);
-$joueurs = $joueurDAO->selectAll();
+$joueurs = new ObtenirTousLesJoueurs($joueurDAO);
+$joueurs = $joueurs->executer();
 
 if (count($joueurs) > 0) {
     echo "<table border='1'>";
