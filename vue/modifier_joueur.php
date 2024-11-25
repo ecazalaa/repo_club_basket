@@ -79,10 +79,17 @@ if (!empty($licence)) {
             text-decoration: none;
             cursor: pointer;
         }
+        .top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
-
+<div class="top-left">
+    <a href="homePage.php" class="button">Retour</a>
+</div>
 <form method="post" action="modifier_joueur.php?licence=<?php echo urlencode($licence); ?>">
     <h1>Modification de Joueur</h1>
     <label for="nom">Nom :</label>
@@ -103,7 +110,6 @@ if (!empty($licence)) {
     <label for="numLicence">Numéro de licence</label>
     <input type="text" id="numLicence" name="numLicence" value="<?php echo $licence; ?>" readonly><br><br>
 
-    <button type="reset">Vider les champs</button>
     <button type="submit">Valider les modifications</button>
 </form>
 
@@ -136,8 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<br><br>
-<a href='homePage.php' class='return-button'>Retour à la page d'accueil</a>
 
 </body>
 </html>

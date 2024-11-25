@@ -1,21 +1,33 @@
 <?php
 session_start();
 
-// Define predefined username and password
-$predefinedUsername = 'admin';
-$predefinedPassword = 'admin';
+require_once '../config/config.php';
+require_once '../modele/Utilisateur.php';
+require_once '../modele/UtilisateurDAO.php';
+require_once '../controleur/RechercheUtilisateur.php';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $mdp = sha1($_POST['mdp']);
 
-    if ($username === $predefinedUsername && $password === $predefinedPassword) {
+    $pdo = connectionBD();
+    $utilisateurDAO = new UtilisateurDAO($pdo);
+    $utilisateur = new RechercheUtilisateur($utilisateurDAO, $nom, $prenom, $mdp);
+    $utilisateur= $utilisateur->executer();
+
+
+    if(!$utilisateur){
+        $error = 'Nom, prenom ou mot de passe incorrect';
+    }
+    else{
         $_SESSION['authenticated'] = true;
         header('Location: homePage.php');
         exit;
-    } else {
-        $error = 'Login ou mot de passe incorrect';
     }
+
 }
 ?>
 
@@ -28,13 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <form method="post" action="login.php">
-        <h1>Login</h1>
+        <h1>Connexion</h1>
         <?php if (isset($error)) { echo "<p style='color:#9c1616;'>$error</p>"; } ?>
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required><br><br>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required><br><br>
+        <label for="mdp">Mot de passe:</label>
+        <input type="password" id="mdp" name="mdp" required><br><br>
         <button type="submit">Se connecter</button>
+        <br><br>
+        <a href="creer_compte_utilisateur.html" class="create-account">Créer mon compte utilisateur</a>
     </form>
+
+
 </body>
 </html>
