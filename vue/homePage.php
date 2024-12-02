@@ -28,6 +28,11 @@ require_once 'session/session.php';
             top: 0;
             z-index: 1000;
         }
+        header img {
+            position: absolute;
+            left: 10px;
+            height: 60px;
+        }
 
         nav {
             display: flex;
@@ -52,13 +57,32 @@ require_once 'session/session.php';
         }
 
         .container {
+            display: flex;
+            flex-direction: column;
             padding: 20px;
             text-align: center;
-            flex: 1;
             margin-top: 120px; /* Adjust based on header and nav height */
         }
-        .liste_joueurs{
-            text-align: left;
+        .liste {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .liste_joueurs, .matchs_a_venir {
+            flex: 1; /* Ensure both boxes take up equal space */
+            max-width: 48%; /* Ensure both boxes take up to 48% of the container width */
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 1%; /* Add margin between the boxes */
+        }
+        .liste_matchs_passe{
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 1%; /* Add margin between the boxes */
         }
 
         footer {
@@ -71,14 +95,13 @@ require_once 'session/session.php';
         }
 
         table {
-            width: 50%; /* Set table width to half the page */
+            width: 100%; /* Set table width to 100% of its container */
             border-collapse: collapse;
-            margin: 20px 0; /* Remove auto centering */
+            margin: 20px 0;
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            float: left; /* Align table to the left */
         }
 
         th, td {
@@ -116,24 +139,38 @@ require_once 'session/session.php';
 <body>
 
 <header>
+    <img src="public/logoClub.png" alt="Club de Basket Labège Logo">
     <h1>Bienvenue au Club de Basket de Labège</h1>
+
 </header>
 
 <nav>
     <a href="saisie_joueur.php">Ajouter un Joueur</a>
     <a href="saisie_recherche_joueur.php">Rechercher un Joueur</a>
+    <a href="saisie_match.php">Ajouter un Match</a>
+    <a href="saisie_recherche_match.php">Rechercher un Match</a>
     <a href="contact.html">Contact</a>
 </nav>
 
 <div class="container">
     <h2>Gestion de votre club de basket</h2>
     <p>Utilisez les liens ci-dessus pour ajouter des joueurs, rechercher des joueurs, ou nous contacter.</p>
-
-    <div class="liste_joueurs" id="joueurs">
+<div class="liste">
+    <div class="liste_joueurs" id="liste_joueurs">
         <h2>Liste des joueurs</h2>
         <?php include 'afficher_joueurs.php'; ?>
     </div>
+    <div class="matchs_a_venir" id="matchs_a_venir">
+        <h2>Matchs à venir</h2>
+        <?php include 'afficher_matchs_a_venir.php'; ?>
+    </div>
 </div>
+    <div class="liste_matchs_passe" id="liste_matchs_passe">
+        <h2>Liste des matchs passés</h2>
+        <?php include 'afficher_matchs_passe.php'; ?>
+    </div>
+</div>
+
 
 <footer>
     <p>&copy; 2024 Club de Basket Labège. Tous droits réservés.</p>

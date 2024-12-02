@@ -14,9 +14,8 @@ $licence = isset($_GET['licence']) ? htmlspecialchars($_GET['licence']) : '';
 
 if (!empty($licence)) {
     // Supprimer le joueur
-    $pdo = connectionBD();
-    $joueurDAO = new JoueurDAO($pdo);
-    $suppression = new SupprimerJoueur($joueurDAO);
+
+    $suppression = new SupprimerJoueur;
     $suppression->executer($licence);
     echo "Le contact a été supprimé avec succès.";
 } else {

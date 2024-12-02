@@ -14,9 +14,7 @@ $licence = isset($_GET['licence']) ? htmlspecialchars($_GET['licence']) : '';
 
 
 if (!empty($licence)) {
-    $pdo = connectionBD();
-    $joueurDAO = new JoueurDAO($pdo);
-    $chercheJ = new RechercheJoueur($joueurDAO, 'licence', $licence);
+    $chercheJ = new RechercheJoueur( 'licence', $licence);
     $j=$chercheJ->executer();
     if ($j) {
         $j = $j[0];
@@ -130,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($nvnom) && !empty($nvprenom) && !empty($nvdateNaissance) && !empty($nvtaille) && !empty($nvpoids) && !empty($nvnumLicence)) {
         $joueurModif = new Joueur($nvnom, $nvprenom, $nvdateNaissance, $nvtaille, $nvpoids, $nvnumLicence);
-        $modifJ = new ModifieJoueur($joueurDAO, $joueurModif);
+        $modifJ = new ModifieJoueur($joueurModif);
         $req = $modifJ->executer();
 
         if ($req) {

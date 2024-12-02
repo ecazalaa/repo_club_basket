@@ -10,6 +10,8 @@ class Joueur {
     private $poids;
     private $licence;
 
+    private $statut;
+
     // Constructeur pour initialiser un joueur
     public function __construct($nom, $prenom, $date_naissance, $taille, $poids, $licence) {
         $this->nom = $nom;
@@ -39,6 +41,10 @@ class Joueur {
     public function getLicence() {
         return $this->licence;
     }
+
+    public function  getStatut(){
+        return $this->statut;
+    }
     public function setNom($nom) {
         $this->nom = $nom;
     }
@@ -58,6 +64,9 @@ class Joueur {
         $this->licence = $licence;
     }
 
+    public function setStatut($statut){
+        $this->statut = $statut;
+    }
 
 
 

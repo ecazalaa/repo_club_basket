@@ -1,13 +1,14 @@
 <?php
-
+require_once '../config/config.php';
+require_once '../modele/JoueurDAO.php';
 class SupprimerJoueur{
 
     private $joueurDAO;
-    private $licence;
 
-    public function __construct(JoueurDAO $joueurDAO)
+    public function __construct()
     {
-        $this->joueurDAO = $joueurDAO;
+        $pdo = connectionBD();
+        $this->joueurDAO = new JoueurDAO($pdo);
     }
 
     public function executer($licence){

@@ -5,7 +5,7 @@ function connectionBD(){
     $host = "localhost";
     $dbname = "club_basket";
     $username = "root";
-    $password = "";
+    $password = "admin";
 
 
 ///Connexion au serveur MySQL

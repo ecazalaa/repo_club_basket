@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Recherche de joueur</title>
+    <title>Recherche de match</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,21 +104,19 @@
 
 
 <form method="post" action="">
-    <h1>Recherche de joueur</h1>
+    <h1>Recherche de match</h1>
     <label for="cle">mot clé :</label>
     <input type="text" id="cle" name="cle" required><br><br>
 
 
     <!-- Sélection d'un critère avec des boutons radio -->
     <h3>Choisir un critère de recherche :</h3>
-    <input type="radio" id="nom" name="critere" value="nom" required>
-    <label for="nom">Nom</label>
+    <input type="radio" id="nom_adversaire" name="critere" value="nom_adversaire" required>
+    <label for="nom_adversaire">Nom adversaire</label>
 
-    <input type="radio" id="prenom" name="critere" value="prenom">
-    <label for="prenom">Prénom</label>
+    <input type="radio" id="lieu" name="critere" value="lieu">
+    <label for="lieu">Lieu du match</label>
 
-    <input type="radio" id="licence" name="critere" value="licence">
-    <label for="licence">Numéro de licence</label>
 
 
     <!-- Bouton-->
@@ -137,20 +135,18 @@
 
 <?php
 require_once 'session/session.php';
-require_once '../config/config.php';
-require_once '../modele/JoueurDAO.php';
-require_once '../controleur/RechercheJoueur.php';
+require_once '../controleur/RechercheMatch.php';
 
 // Récupérer les données du formulaire
 $critere = null;
 $motcle=null;
 
 if (isset($_POST['cle'])) {
-$motcle = $_POST['cle'];
+    $motcle = $_POST['cle'];
 }
 
 if (isset($_POST['critere'])) {
-$critere = $_POST['critere'];
+    $critere = $_POST['critere'];
 }
 
 
@@ -158,37 +154,35 @@ $critere = $_POST['critere'];
 
 if (!empty($motcle) && !empty($critere)) {
 // Requête dynamique basée sur le critère choisi
-    $recherche = new RechercheJoueur( $critere,$motcle);
-    $joueurs=$recherche->executer();
+    $recherche = new RechercheMatch( $critere,$motcle);
+    $matchBaskets=$recherche->executer();
 // Vérifier s'il y a des résultats
-if (count($joueurs) > 0) {
+    if (count($matchBaskets) > 0) {
 // Afficher les résultats dans un tableau HTML avec des liens de modification et suppression
-echo "<table border='1'>";
-    echo "<tr><th>Nom</th><th>Prénom</th><th>Date de naissance</th><th>Taille</th><th>Poids</th><th>Numéro de licence</th><th>Actions</th></tr>";
+        echo "<table border='1'>";
+        echo "<tr><th>Date</th><th>Nom adversaire</th><th>Lieu</th><th>Resultat</th><th>Actions</th></tr>";
 
-    // Parcourir les résultats
-    foreach ($joueurs as $joueur) {
-    echo "<tr>";
-        echo "<td>" . htmlspecialchars($joueur['nom']) . "</td>";
-        echo "<td>" . htmlspecialchars($joueur['prenom']) . "</td>";
-        echo "<td>" . htmlspecialchars($joueur['date_naissance']) . "</td>";
-        echo "<td>" . htmlspecialchars($joueur['taille']) . "</td>";
-        echo "<td>" . htmlspecialchars($joueur['poids']) . "</td>";
-        echo "<td>" . htmlspecialchars($joueur['licence']) . "</td>";
+        // Parcourir les résultats
+        foreach ($matchBaskets as $matchBasket) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($matchBasket['M_date']) . "</td>";
+            echo "<td>" . htmlspecialchars($matchBasket['nom_adversaire']) . "</td>";
+            echo "<td>" . htmlspecialchars($matchBasket['lieu']) . "</td>";
+            echo "<td>" . htmlspecialchars($matchBasket['resultat']) . "</td>";
 
-        // Ajouter les hyperliens pour modifier et supprimer le joueur
-        echo "<td>";
-            echo '<a href="modifier_joueur.php?licence=' . urlencode($joueur['licence']) . '">Modifier |</a>';
-            echo '<a href="supprimer_joueur.php?licence=' . urlencode($joueur['licence']) . '">Supprimer</a>';
+            // Ajouter les hyperliens pour modifier et supprimer le joueur
+            echo "<td>";
+            echo '<a href="modifier_match.php?Id_Match=' . urlencode($matchBasket['Id_Match']) . '">Modifier |</a>';
+            echo '<a href="supprimer_match.php?Id_Match=' . urlencode($matchBasket['Id_Match']) . '">Supprimer</a>';
             echo "</td>";
 
-        echo "</tr>";
-    }
+            echo "</tr>";
+        }
 
-    echo "</table>";
-} else {
-echo "Aucun joueur trouvé pour le " .$critere." sélectionné : " . htmlspecialchars($motcle);
-}
+        echo "</table>";
+    } else {
+        echo "Aucun match trouvé pour le " .$critere." sélectionné : " . htmlspecialchars($motcle);
+    }
 }
 
 ?>

@@ -2,9 +2,7 @@
 
 
 require_once 'session/session.php';
-require_once '../config/config.php';
 require_once '../modele/Joueur.php';
-require_once '../modele/JoueurDAO.php';
 require_once '../controleur/CreerJoueur.php';
 require_once '../controleur/RechercheJoueur.php';
 
@@ -16,12 +14,8 @@ $taille = htmlspecialchars($_POST['taille']);
 $poids = htmlspecialchars($_POST['poids']);
 $licence = htmlspecialchars($_POST['numLicence']);
 
-//connexion à la base de données
-$pdo = connectionBD();
 
-//Création d'un objet JoueurDAO
-$joueurDAO = new JoueurDAO($pdo);
-$recherche = new RechercheJoueur($joueurDAO, 'licence',$licence);
+$recherche = new RechercheJoueur( 'licence',$licence);
 
 $joueurExistant = $recherche->executer();
 
@@ -32,7 +26,7 @@ if ($joueurExistant) {
 } else {
     // Créer une instance de Joueur
     $joueur = new Joueur($nom, $prenom, $date_naissance, $taille, $poids, $licence);
-    $insersion = new CreerJoueur($joueurDAO, $joueur);
+    $insersion = new CreerJoueur($joueur);
     // Ajouter le joueur à la base de données
     $insersion->executer();
 

@@ -13,11 +13,8 @@ $prenom = htmlspecialchars($_POST['prenom']);
 $mdp = sha1($_POST['mdp']);
 
 //connexion à la base de données
-$pdo = connectionBD();
 
-
-$utilisateurDAO = new UtilisateurDAO($pdo);
-$recherche = new RechercheUtilisateur($utilisateurDAO,$nom,$prenom,$mdp);
+$recherche = new RechercheUtilisateur($nom,$prenom,$mdp);
 
 $UtilisateurExistant = $recherche->executer();
 
@@ -28,7 +25,7 @@ if ($UtilisateurExistant) {
 } else {
     // Créer une instance de Utilisateur
     $utilisateur = new Utilisateur($nom, $prenom, $mdp);
-    $insersion = new CreerUtilisateur($utilisateurDAO, $utilisateur);
+    $insersion = new CreerUtilisateur($utilisateur);
     // Ajouter l'utilisateur à la base de données
     $insersion->executer();
 

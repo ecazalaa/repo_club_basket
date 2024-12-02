@@ -1,13 +1,15 @@
 <?php
-
+require_once '../config/config.php';
+require_once '../modele/UtilisateurDAO.php';
 class RechercheUtilisateur{
     private $utilisateurDAO;
     private $nom;
     private $prenom;
     private $mdp;
-    public function __construct(UtilisateurDAO $utilisateurDAO, $nom, $prenom, $mdp)
+    public function __construct( $nom, $prenom, $mdp)
     {
-        $this->utilisateurDAO = $utilisateurDAO;
+        $pdo = connectionBD();
+        $this->utilisateurDAO = new UtilisateurDAO($pdo);
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mdp = $mdp;

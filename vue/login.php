@@ -13,9 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prenom = $_POST['prenom'];
     $mdp = sha1($_POST['mdp']);
 
-    $pdo = connectionBD();
-    $utilisateurDAO = new UtilisateurDAO($pdo);
-    $utilisateur = new RechercheUtilisateur($utilisateurDAO, $nom, $prenom, $mdp);
+
+    $utilisateur = new RechercheUtilisateur( $nom, $prenom, $mdp);
     $utilisateur= $utilisateur->executer();
 
 
