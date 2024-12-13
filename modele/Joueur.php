@@ -9,7 +9,6 @@ class Joueur {
     private $taille;
     private $poids;
     private $licence;
-
     private $statut;
 
     // Constructeur pour initialiser un joueur

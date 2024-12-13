@@ -3,9 +3,8 @@
 
 
 require_once 'session/session.php';
-require_once '../config/config.php';
+require_once 'session/session_timeout.php';
 require_once '../modele/Joueur.php';
-require_once '../modele/JoueurDAO.php';
 require_once '../controleur/RechercheJoueur.php';
 
 // Récupérer le numéro de licence du joueur à modifier

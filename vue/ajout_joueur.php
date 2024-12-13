@@ -2,6 +2,7 @@
 
 
 require_once 'session/session.php';
+require_once 'session/session_timeout.php';
 require_once '../modele/Joueur.php';
 require_once '../controleur/CreerJoueur.php';
 require_once '../controleur/RechercheJoueur.php';

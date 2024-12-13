@@ -45,5 +45,10 @@ class JoueurDAO{
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function udpateSatut($licence, $statut){
+        $query = "UPDATE club_basket.joueur SET statut = :statut WHERE licence = :licence";
+        $req = $this->pdo->prepare($query);
+        return $req->execute([':licence' => $licence, ':statut' => $statut]);
+    }
 
 }

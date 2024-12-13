@@ -1,6 +1,7 @@
 <?php
 
 require_once 'session/session.php';
+require_once 'session/session_timeout.php';
 ?>
 <!DOCTYPE html>
 <html>

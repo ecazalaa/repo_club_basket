@@ -135,6 +135,7 @@
 
 <?php
 require_once 'session/session.php';
+require_once 'session/session_timeout.php';
 require_once '../controleur/RechercheMatch.php';
 
 // Récupérer les données du formulaire

@@ -1,9 +1,8 @@
 <?php
 
 
-require_once '../config/config.php';
+require_once 'session/session_timeout.php';
 require_once '../modele/Utilisateur.php';
-require_once '../modele/UtilisateurDAO.php';
 require_once '../controleur/CreerUtilisateur.php';
 require_once '../controleur/RechercheUtilisateur.php';
 

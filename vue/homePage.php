@@ -1,5 +1,6 @@
 <?php
 require_once 'session/session.php';
+require_once 'session/session_timeout.php';
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +71,7 @@ require_once 'session/session.php';
         }
         .liste_joueurs, .matchs_a_venir {
             flex: 1; /* Ensure both boxes take up equal space */
-            max-width: 48%; /* Ensure both boxes take up to 48% of the container width */
+            /* Ensure both boxes take up to 48% of the container width */
             background-color: #fff;
             border-radius: 8px;
             padding: 20px;
@@ -134,6 +135,22 @@ require_once 'session/session.php';
         .logout-button:hover {
             background-color: #296e3f;
         }
+        .button-modif {
+            background-color: #0b8810; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .button-modif:hover {
+            background-color: #0a6e0a;
+        }
     </style>
 </head>
 <body>
@@ -141,7 +158,6 @@ require_once 'session/session.php';
 <header>
     <img src="public/logoClub.png" alt="Club de Basket Labège Logo">
     <h1>Bienvenue au Club de Basket de Labège</h1>
-
 </header>
 
 <nav>
@@ -158,7 +174,8 @@ require_once 'session/session.php';
 <div class="liste">
     <div class="liste_joueurs" id="liste_joueurs">
         <h2>Liste des joueurs</h2>
-        <?php include 'afficher_joueurs.php'; ?>
+        <?php include 'afficher_joueurs.php';
+        echo getAllPlayers()?>
     </div>
     <div class="matchs_a_venir" id="matchs_a_venir">
         <h2>Matchs à venir</h2>

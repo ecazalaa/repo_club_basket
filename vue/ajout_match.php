@@ -1,6 +1,7 @@
 <?php
 
 require_once 'session/session.php';
+require_once 'session/session_timeout.php';
 require_once '../modele/MatchBasket.php';
 require_once '../controleur/CreerMatch.php';
 require_once '../controleur/RechercheMatch.php';
