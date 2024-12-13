@@ -1,3 +1,8 @@
+<?php
+
+require_once 'session/session.php';
+require_once 'session/session_timeout.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +18,13 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            position: relative;
+        }
+
+        .top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         form {
@@ -37,7 +49,9 @@
         }
 
         input[type="text"],
-        input[type="email"] {
+        input[type="email"],
+        input[type="date"],
+        input[type="number"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0 20px 0;
@@ -69,10 +83,12 @@
             }
         }
     </style>
-
 </head>
 <body>
 
+<div class="top-left">
+    <a href="homePage.php" class="button">Retour</a>
+</div>
 
 <form method="post" action="ajout_joueur.php">
     <h1>Saisie d'un Joueur</h1>
@@ -95,10 +111,8 @@
     <input type="text" id="numLicence" name="numLicence" pattern="\d{6}" maxlength="6" title="Le numéro de licence doit être composé de 6 chiffres" required><br><br>
 
     <button type="reset">Vider les champs</button>
-
     <button type="submit">Ajouter le joueur</button>
-
-
 </form>
+
 </body>
 </html>
