@@ -10,7 +10,7 @@ require_once 'session/session_timeout.php';
     <title>Club de Basket Labège - Accueil</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -19,10 +19,12 @@ require_once 'session/session_timeout.php';
             min-height: 100vh;
         }
 
+
         header {
             background-color: #333;
             color: #1a8f3b;
             padding: 10px 0;
+            display: flex;
             text-align: center;
             position: fixed;
             width: 100%;
@@ -35,26 +37,77 @@ require_once 'session/session_timeout.php';
             height: 60px;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            margin-top: 49px; /* Adjust based on header height */
+        .header-content {
             width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            color: white;
+            text-align: center;
+            flex-grow: 1;
+            font-size: 1.8rem;
+        }
+
+        /* Navigation collée au header */
+        nav {
+            background-color: #444; /* Couleur de fond du nav */
             position: fixed;
-            top: 50px; /* Adjust based on header height */
+            top: 80px; /* Colle à la hauteur exacte du header */
+            width: 100%;
             z-index: 999;
         }
 
-        nav a {
-            color: #379153;
-            padding: 14px 20px;
-            text-decoration: none;
-            text-align: center;
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        nav a:hover {
-            background-color: #555;
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        nav ul li:hover > a {
+            background-color: #666; /* Couleur de fond au survol */
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 200px;
+            box-shadow: var(--shadow);
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            width: 100%;
+        }
+
+        nav ul li ul li a {
+            color: var(--nav-color);
+            padding: 12px 20px;
         }
 
         .container {
@@ -151,6 +204,38 @@ require_once 'session/session_timeout.php';
         .button-modif:hover {
             background-color: #0a6e0a;
         }
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                padding: 10px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin: 0 0 10px 0;
+            }
+
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                top: auto;
+                position: relative;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li ul {
+                position: static;
+                width: 100%;
+            }
     </style>
 </head>
 <body>
@@ -161,16 +246,28 @@ require_once 'session/session_timeout.php';
 </header>
 
 <nav>
-    <a href="saisie_joueur.php">Ajouter un Joueur</a>
-    <a href="saisie_recherche_joueur.php">Rechercher un Joueur</a>
-    <a href="saisie_match.php">Ajouter un Match</a>
-    <a href="saisie_recherche_match.php">Rechercher un Match</a>
-    <a href="contact.html">Contact</a>
-</nav>
+        <ul>
+            <li>
+                <a href="#">Joueurs</a>
+                <ul>
+                    <li><a href="saisie_joueur.php">Ajouter un Joueur</a></li>
+                    <li><a href="saisie_recherche_joueur.php">Rechercher un Joueur</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Matchs</a>
+                <ul>
+                    <li><a href="saisie_match.php">Ajouter un Match</a></li>
+                    <li><a href="saisie_recherche_match.php">Rechercher un Match</a></li>
+                </ul>
+            </li>
+            <li><a href="feuilleStatistique.php">Statistiques</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
 
 <div class="container">
     <h2>Gestion de votre club de basket</h2>
-    <p>Utilisez les liens ci-dessus pour ajouter des joueurs, rechercher des joueurs, ou nous contacter.</p>
 <div class="liste">
     <div class="liste_joueurs" id="liste_joueurs">
         <h2>Liste des joueurs</h2>

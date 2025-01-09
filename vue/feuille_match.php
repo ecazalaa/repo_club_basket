@@ -30,7 +30,6 @@ if (!empty($idMatch)) {
 <head>
     <meta charset="UTF-8">
     <title>Feuille de match</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,7 +82,7 @@ if (!empty($idMatch)) {
             min-height: 50px;
         }
 
-        .reset-button {
+        .reset-button, .submit-button {
             margin-top: 20px;
             padding: 10px 20px;
             background-color: #007bff;
@@ -104,37 +103,70 @@ if (!empty($idMatch)) {
     </div>
     <div class="block" id="block2">
         <h2>Feuille de match</h2>
-        <table>
-            <tr>
-                <th>Poste</th>
-                <th>Joueur</th>
-            </tr>
-            <tr>
-                <td>Gardien</td>
-                <td class="droppable" id="gardien"></td>
-            </tr>
-            <tr>
-                <td>Défenseur</td>
-                <td class="droppable" id="defenseur"></td>
-            </tr>
-            <tr>
-                <td>Milieu</td>
-                <td class="droppable" id="milieu"></td>
-            </tr>
-            <tr>
-                <td>Attaquant</td>
-                <td class="droppable" id="attaquant"></td>
-            </tr>
-        </table>
+        <form id="matchForm" method="post" action="traiter_participation.php">
+            <input type="hidden" name="matchId" value="<?php echo $idMatch; ?>">
+            <table>
+                <tr>
+                    <th>Poste</th>
+                    <th>Joueur</th>
+                </tr>
+                <tr>
+                    <td>Meneur</td>
+                    <td class="droppable" id="meneur"></td>
+                </tr>
+                <tr>
+                    <td>Ailier fort</td>
+                    <td class="droppable" id="ailier fort"></td>
+                </tr>
+                <tr>
+                    <td>Ailier faible</td>
+                    <td class="droppable" id="ailier faible"></td>
+                </tr>
+                <tr>
+                    <td>Pivot</td>
+                    <td class="droppable" id="pivot"></td>
+                </tr>
+                <tr>
+                    <td>Arrière</td>
+                    <td class="droppable" id="arriere"></td>
+                </tr>
+                <tr>
+                    <th>Remplacant</th>
+                    <th>Joueur</th>
+                </tr>
+                <tr>
+                    <td>Remplaçant 1</td>
+                    <td class="droppable" id="remplacant"></td>
+                </tr>
+                <tr>
+                    <td>Remplaçant 2</td>
+                    <td class="droppable" id="remplacant"></td>
+                </tr>
+                <tr>
+                    <td>Remplaçant 3</td>
+                    <td class="droppable" id="remplacant"></td>
+                </tr>
+                <tr>
+                    <td>Remplaçant 4</td>
+                    <td class="droppable" id="remplacant"></td>
+                </tr>
+                <tr>
+                    <td>Remplaçant 5</td>
+                    <td class="droppable" id="remplacant"></td>
+                </tr>
+            </table>
+            <button type="button" class="reset-button" id="resetButton">Réinitialiser</button>
+            <button type="submit" class="submit-button">Valider</button>
+        </form>
     </div>
 </div>
-<button class="reset-button" id="resetButton">Réinitialiser</button>
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const components = document.querySelectorAll('.component');
         const droppables = document.querySelectorAll('.droppable');
         const block1 = document.getElementById('block1');
         const resetButton = document.getElementById('resetButton');
+        const matchForm = document.getElementById('matchForm');
 
         components.forEach(component => {
             component.addEventListener('dragstart', dragStart);
@@ -169,6 +201,41 @@ if (!empty($idMatch)) {
                     block1.appendChild(droppable.firstChild);
                 }
             });
+        });
+
+        matchForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            const participations = [];
+            droppables.forEach(droppable => {
+                if (droppable.firstChild) {
+                    const joueurId = droppable.firstChild.id;
+                    const poste = droppable.id;
+                    participations.push({ joueurId, poste });
+                }
+            });
+
+            const data = {
+                matchId: document.querySelector('input[name="matchId"]').value,
+                participations: participations
+            };
+
+            fetch('create_participation.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                    alert(result); // Display the server response in an alert
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Erreur lors de l\'enregistrement des participations.');
+                });
         });
     });
 </script>
