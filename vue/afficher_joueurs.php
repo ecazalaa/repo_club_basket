@@ -66,7 +66,7 @@ function getDraggablePlayers()
     if (count($joueurs) > 0) {
         foreach ($joueurs as $joueur) {
             if($joueur['statut'] == 'actif') {
-                $output .= '<div class="component" draggable="true" id="player_' . htmlspecialchars($joueur['licence']) . '">';
+                $output .= '<div class="component" draggable="true" id="'.htmlspecialchars($joueur['licence']).'">';
                 $output .= htmlspecialchars($joueur['Nom']) . ' ' . htmlspecialchars($joueur['Prenom']) . ' / ' . htmlspecialchars($joueur['taille']) . 'cm / ' . htmlspecialchars($joueur['poids'] . 'kg');
                 $output .= '</div>';
             }

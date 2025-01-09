@@ -20,12 +20,12 @@ if (count($matchs) > 0) {
         echo "<td>" . htmlspecialchars($matchBasket['M_date']) . "</td>";
         echo "<td>" . htmlspecialchars($matchBasket['nom_adversaire']) . "</td>";
         echo "<td>" . htmlspecialchars($matchBasket['lieu']) . "</td>";
-        echo "<td><a href='feuille_match.php?id=" . htmlspecialchars($matchBasket['Id_Match']) . "' class='button-modif'>Feuille de Match</a></td>";
+        echo "<td><a href='feuille_matchV2.php?id=" . htmlspecialchars($matchBasket['Id_Match']) . "' class='button-modif'>Feuille de Match</a></td>";
         echo "</tr>";
     }
 
     echo "</table>";
 } else {
-    echo "Aucun joueur trouvé.";
+    echo "Aucun matchs trouvé.";
 }
 ?>

@@ -31,12 +31,6 @@ class MatchDAO{
             ':resultat' => $match->getResultat()
         ]);
     }
-    public function updateResultat(MatchBasket $match, $resultat){
-        $query = "UPDATE club_basket.match_basket SET resultat = :resultat WHERE Id_Match = :Id_Match";
-        $req = $this->pdo->prepare($query);
-        return $req->execute([':resultat' => $resultat,
-            ':Id_Match' => $match->getIdMatch()]);
-    }
     public function delete($IdMatch){
         $query = "DELETE FROM club_basket.match_basket WHERE Id_Match = :Id_match";;
         $req = $this->pdo->prepare($query);
@@ -48,6 +42,13 @@ class MatchDAO{
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function updateResultat($IdMatch, $resultat){
+        $query = "UPDATE club_basket.match_basket SET resultat = :resultat WHERE Id_Match = :Id_Match";
+        $req = $this->pdo->prepare($query);
+        return $req->execute([':resultat' => $resultat,
+            ':Id_Match' => $IdMatch]);
+    }
+
     /*
     public function selectAll() {
         $query = "SELECT * FROM club_basket.match_basket";

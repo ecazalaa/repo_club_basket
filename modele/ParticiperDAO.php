@@ -24,8 +24,16 @@ class ParticiperDAO
     {
         $query = "SELECT licence,Id_Match,Titu_Remp,poste,Note FROM club_basket.participer WHERE $critere = :motcle";
         $req = $this->pdo->prepare($query);
-        $req->execute(['motcle' => $motcle]);
+        $req->execute([':motcle' => $motcle]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function select2($licence, $Id_Match)
+    {
+        $query = "SELECT licence,Id_Match,Titu_Remp,poste,Note FROM club_basket.participer WHERE licence = :licence AND Id_Match = :Id_Match";
+        $req = $this->pdo->prepare($query);
+        $req->execute(['licence' => $licence, 'Id_Match' => $Id_Match]);
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     public function update(Participer $participer)
