@@ -6,6 +6,7 @@ class ModifieJoueur
     private $joueurDAO;
     private $joueur;
 
+    // Constructeur : Initialise la connexion PDO et le joueur à ajouter
     public function __construct( Joueur $joueur)
     {
         $pdo = connectionBD();

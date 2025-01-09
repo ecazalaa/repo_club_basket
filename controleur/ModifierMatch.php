@@ -7,6 +7,7 @@ class ModifierMatch{
     private $matchDAO;
     private $match;
 
+    // Constructeur : Initialise la connexion PDO et le match à modifier
     public function __construct(MatchBasket $match)
     {
         $pdo = connectionBD();
