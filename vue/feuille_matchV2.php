@@ -7,6 +7,9 @@ require_once '../controleur/RechercheJoueur.php';
 
 $idMatch = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 
+$statusMessage = '';
+$statusClass = '';
+
 if (!empty($idMatch)) {
     $chercheMatch = new RechercheMatch('Id_Match', $idMatch);
     $m = $chercheMatch->executer();
@@ -15,12 +18,25 @@ if (!empty($idMatch)) {
         $date = htmlspecialchars($m["M_date"]);
         $lieu = htmlspecialchars($m["lieu"]);
         $nomAdversaire = htmlspecialchars($m['nom_adversaire']);
+
+        // Compare the match date with the current date
+        $currentDate = date('Y-m-d H:i:s');
+        if ($date < $currentDate) {
+            $statusMessage = "Le match est passé et la feuille de match pas être consulté.";
+            $statusClass = "error";
+        }
     } else {
-        echo "Match non trouvé.";
-        exit;
+        $statusMessage = "Match non trouvé.";
+        $statusClass = "error";
     }
 } else {
-    echo "Id de match non fourni.";
+    $statusMessage = "Id de match non fourni.";
+    $statusClass = "error";
+}
+
+if (!empty($statusMessage)) {
+    echo "<div class='status-message.error $statusClass'>$statusMessage</div>";
+    echo "<br><br><a href='homePage.php'>Retour</a>";
     exit;
 }
 
@@ -181,6 +197,25 @@ foreach ($participations as $participation) {
             margin-bottom: 2rem;
         }
 
+        .status-message {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .status-message.success {
+            color: var(--success-color);
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+
+        .status-message.error {
+            color: var(--error-color);
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
@@ -270,6 +305,7 @@ foreach ($participations as $participation) {
     </script>
 </head>
 <body>
+<a href="homePage.php" class="back-button">Retour</a>
 <div class="container">
     <div class="header-container">
         <h1>Feuille de match</h1>

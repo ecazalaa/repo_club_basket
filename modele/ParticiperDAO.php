@@ -52,4 +52,16 @@ class ParticiperDAO
         $req = $this->pdo->prepare($query);
         return $req->execute(['licence' => $licence, 'Id_Match' => $Id_Match]);
     }
+    public function deleteByIdMatch($Id_Match)
+    {
+        $query = "DELETE FROM club_basket.participer WHERE Id_Match = :Id_Match";
+        $req = $this->pdo->prepare($query);
+        return $req->execute(['Id_Match' => $Id_Match]);
+    }
+    public function updateNote($licence, $Id_Match, $Note)
+    {
+        $query = "UPDATE club_basket.participer SET Note = :Note WHERE licence = :licence AND Id_Match = :Id_Match";
+        $req = $this->pdo->prepare($query);
+        return $req->execute(['Note' => $Note, 'licence' => $licence, 'Id_Match' => $Id_Match]);
+    }
 }
