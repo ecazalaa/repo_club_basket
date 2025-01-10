@@ -163,7 +163,7 @@ if (!empty($IdMatch)) {
             </form>
         <?php endif; ?>
         <div class="button-container">
-            <button onclick="window.location.href='homePage.php'" class="button">
+            <button onclick="window.location.href='index.php'" class="button">
                 Retour à la page d'accueil
             </button>
         </div>
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($req) {
             $statusMessage = "Le match a été modifié avec succès.";
             $statusClass = "success";
-            header('Location: homePage.php');
+            header('Location: index.php');
         } else {
             $statusMessage = "Aucune modification effectuée.";
             $statusClass = "error";

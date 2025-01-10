@@ -29,7 +29,7 @@ if (!empty($licence)) {
 }
 
 
-echo "<br><br><a href='homePage.php'>Retour</a> | ";
+echo "<br><br><a href='index.php'>Retour</a> | ";
 
 
 ?>

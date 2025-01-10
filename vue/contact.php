@@ -192,7 +192,7 @@ require_once 'session/session_timeout.php';
     <div class="header-content">
         <img src="public/logoClub.png" alt="Club de Basket Labège Logo">
         <h1>Contact - Club de Basket de Labège</h1>
-        <a href="homePage.php">
+        <a href="index.php">
             <img src="public/home.png" alt="Home" class="home-icon">
         </a>
     </div>

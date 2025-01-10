@@ -32,4 +32,4 @@ if ($matchExistant) {
 }
 ?>
 <br><br>
-<a href="homePage.php" class="button">retour</a>
+<a href="index.php" class="button">retour</a>

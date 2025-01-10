@@ -36,7 +36,7 @@ if (!empty($idMatch)) {
 
 if (!empty($statusMessage)) {
     echo "<div class='status-message.error $statusClass'>$statusMessage</div>";
-    echo "<br><br><a href='homePage.php'>Retour</a>";
+    echo "<br><br><a href='index.php'>Retour</a>";
     exit;
 }
 
@@ -305,7 +305,7 @@ foreach ($participations as $participation) {
     </script>
 </head>
 <body>
-<a href="homePage.php" class="back-button">Retour</a>
+<a href="index.php" class="back-button">Retour</a>
 <div class="container">
     <div class="header-container">
         <h1>Feuille de match</h1>

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     else{
         $_SESSION['authenticated'] = true;
-        header('Location: homePage.php');
+        header('Location: index.php');
         exit;
     }
 

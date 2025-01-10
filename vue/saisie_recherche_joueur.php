@@ -128,7 +128,7 @@
 </form>
 
 <!-- Add a button to return to the homepage -->
-<a href="homePage.php" class="button">Retour à la page d'accueil</a>
+<a href="index.php" class="button">Retour à la page d'accueil</a>
 
 <br>
 <br>
