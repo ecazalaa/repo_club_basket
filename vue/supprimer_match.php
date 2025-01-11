@@ -156,7 +156,7 @@ if (!empty($IdMatch)) {
             </div>
         <?php endif; ?>
         <div class="button-container">
-            <button onclick="window.location.href='homePage.php'" class="button">
+            <button onclick="window.location.href='index.php'" class="button">
                 Retour à la page d'accueil
             </button>
         </div>

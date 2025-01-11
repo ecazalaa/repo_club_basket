@@ -118,7 +118,7 @@ if ($m) {
 </head>
 <body>
 <div class="container">
-    <a href="HomePage.php" class="btn-retour">Retour aux matchs</a>
+    <a href="index.php" class="btn-retour">Retour aux matchs</a>
 
     <?php if (isset($messageSuccess)): ?>
         <div class="message success"><?php echo $messageSuccess; ?></div>

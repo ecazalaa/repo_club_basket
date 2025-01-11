@@ -10,7 +10,7 @@ class UtilisateurDAO{
     }
 
     public function insert(Utilisateur $utilisateur){
-        $query = "INSERT INTO club_basket.utilisateur(Nom,Prenom,Mot_de_passe) VALUES(:nom , :prenom, :mdp)";
+        $query = "INSERT INTO clubbasket_bd.utilisateur(Nom,Prenom,Mot_de_passe) VALUES(:nom , :prenom, :mdp)";
         $req = $this->pdo->prepare($query);
         return $req->execute([':nom' => $utilisateur->getNom(),
             ':prenom' => $utilisateur->getPrenom(),
@@ -18,7 +18,7 @@ class UtilisateurDAO{
     }
 
     public function select($nom, $prenom, $mdp){
-        $query = "SELECT nom, prenom,mot_de_passe FROM club_basket.utilisateur WHERE nom = :nom AND prenom = :prenom AND mot_de_passe = :mdp";
+        $query = "SELECT nom, prenom,mot_de_passe FROM clubbasket_bd.utilisateur WHERE nom = :nom AND prenom = :prenom AND mot_de_passe = :mdp";
         $req = $this->pdo->prepare($query);
         $req->execute([':nom' => $nom, ':prenom' => $prenom, ':mdp' => $mdp]);
         return $req->fetch(PDO::FETCH_ASSOC);

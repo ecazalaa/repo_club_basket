@@ -49,16 +49,15 @@ function getMatchStats() {
 
 // Fonction pour obtenir les statistiques par joueur
 function getPlayerStats() {
-    
     $rechercheJoueur = new ObtenirTousLesJoueurs();
     $joueurs = $rechercheJoueur->executer();
     $statsJoueurs = [];
-    
+
     foreach ($joueurs as $joueur) {
         $licence = $joueur['licence'];
         $rechercheParticipation = new RechercheParticipation('licence', $licence);
         $participations = $rechercheParticipation->executer();
-        
+
         $statsJoueur = [
             'nom' => $joueur['Nom'],
             'prenom' => $joueur['Prenom'],
@@ -70,26 +69,25 @@ function getPlayerStats() {
             'total_matchs' => 0,
             'selections_consecutives' => getSelectionsConsecutives($licence)
         ];
-        
+
         $postes = [];
         foreach ($participations as $participation) {
-            // Compter titularisations et remplacements
+            // Count starts and substitutions
             if ($participation['Titu_Remp'] == 'titulaire') {
                 $statsJoueur['titularisations']++;
             } else {
                 $statsJoueur['remplacements']++;
             }
-            
-            // Collecter les postes pour déterminer le poste préféré
+
+            // Collect positions to determine the preferred position
             if ($participation['poste']) {
                 $postes[] = $participation['poste'];
             }
-            
-            // Collecter les évaluations
-            if ($participation['Note']) {
-                $statsJoueur['evaluations'][] = $participation['Note'];
-            }
 
+            // Collect ratings
+            if (is_numeric($participation['Note'])) {
+                $statsJoueur['evaluations'][] = (float)$participation['Note'];
+            }
 
             // Check if the match was won
             $match = (new RechercheMatch('Id_Match', $participation['Id_Match']))->executer()[0];
@@ -100,15 +98,10 @@ function getPlayerStats() {
                     $statsJoueur['matchs_gagnes']++;
                 }
                 $statsJoueur['total_matchs']++;
-            } else {
-                // Handle the case where the resultat format is incorrect
-                // For example, you can log an error or set default values
-                $scoreEquipe = 0;
-                $scoreAdversaire = 0;
             }
         }
-        
-        // Calculer le poste préféré (le plus joué)
+
+        // Calculate the preferred position (most played)
         if (!empty($postes)) {
             $posteCounts = array_count_values($postes);
             arsort($posteCounts);
@@ -116,23 +109,21 @@ function getPlayerStats() {
         } else {
             $statsJoueur['poste_prefere'] = 'Non défini';
         }
-        
-        // Calculer la moyenne des évaluations
-        $statsJoueur['moyenne_evaluations'] = !empty($statsJoueur['evaluations']) 
+
+        // Calculate the average rating
+        $statsJoueur['moyenne_evaluations'] = !empty($statsJoueur['evaluations'])
             ? round(array_sum($statsJoueur['evaluations']) / count($statsJoueur['evaluations']), 1)
             : 'N/A';
-        
-        // Calculer le pourcentage de matchs gagnés
-        $statsJoueur['pct_victoires'] = $statsJoueur['total_matchs'] 
+
+        // Calculate the percentage of matches won
+        $statsJoueur['pct_victoires'] = $statsJoueur['total_matchs']
             ? round(($statsJoueur['matchs_gagnes'] / $statsJoueur['total_matchs']) * 100, 1)
             : 0;
-            
+
         $statsJoueurs[] = $statsJoueur;
     }
-    
-    return $statsJoueurs;
-    
 
+    return $statsJoueurs;
 }
 
 // Fonction pour calculer les sélections consécutives
@@ -300,7 +291,7 @@ $playerStats = getPlayerStats();
 <body>
     <div class="container">
         <h1>Statistiques de l'équipe</h1>
-        <a href="HomePage.php" class="button">Retour à l'accueil</a>
+        <a href="index.php" class="button">Retour à l'accueil</a>
 
         <!-- Statistiques générales -->
         <div class="stats-grid">

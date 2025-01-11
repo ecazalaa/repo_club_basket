@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="message <?php echo $success ? 'success' : 'error'; ?>">
         <?php echo $message; ?>
     </div>
-    <a href="HomePage.php" class="btn-retour">Retour à l'accueil</a>
+    <a href="index.php" class="btn-retour">Retour à l'accueil</a>
 </div>
 </body>
 </html>
