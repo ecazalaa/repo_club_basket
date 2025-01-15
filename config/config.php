@@ -2,10 +2,10 @@
 
 
 function connectionBD(){
-    $host = "localhost";
-    $dbname = "club_basket";
-    $username = "root";
-    $password = "admin";
+    $host = "mysql-clubbasket.alwaysdata.net";
+    $dbname = "clubbasket_bd";
+    $username = "388209";
+    $password = "Agaboubou65$";
 
 
 ///Connexion au serveur MySQL

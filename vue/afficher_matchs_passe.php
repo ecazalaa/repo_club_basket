@@ -1,5 +1,4 @@
 <?php
-
 require_once 'session/session.php';
 require_once 'session/session_timeout.php';
 require_once '../controleur/ObtenirTousLesMatchsPasse.php';
@@ -9,7 +8,7 @@ $matchs = $matchs->executer();
 
 if (count($matchs) > 0) {
     echo "<table border='1'>";
-    echo "<tr><th>Date</th><th>Nom adversaires</th><th>Lieu</th><th>Resultat</th><th>Action</th></tr>";
+    echo "<tr><th>Date</th><th>Nom adversaires</th><th>Lieu</th><th>Resultat</th><th>Action</th><th>Évaluation</th></tr>";
 
     foreach ($matchs as $matchBasket) {
         echo "<tr>";
@@ -17,7 +16,8 @@ if (count($matchs) > 0) {
         echo "<td>" . htmlspecialchars($matchBasket['nom_adversaire']) . "</td>";
         echo "<td>" . htmlspecialchars($matchBasket['lieu']) . "</td>";
         echo "<td><input type='text' id='resultat_" . $matchBasket['Id_Match'] . "' value='" . htmlspecialchars($matchBasket['resultat']) . "'></td>";
-        echo "<td><button class='btn-enregistrer' onclick='updateScore(" . $matchBasket['Id_Match'] . ")'>Enregistrer</button></td>";
+        echo "<td><button class='btn-enregistrer' onclick='updateScore(" . $matchBasket['Id_Match'] . ")'>Enregistrer score</button></td>";
+        echo "<td><button class='btn-evaluer' onclick='window.location.href=\"evaluer_joueurs.php?match_id=" . $matchBasket['Id_Match'] . "\"'>Évaluer les joueurs</button></td>";
         echo "</tr>";
     }
 
@@ -28,7 +28,7 @@ if (count($matchs) > 0) {
 ?>
 
     <style>
-        .btn-enregistrer {
+        .btn-enregistrer, .btn-evaluer {
             background-color: #1a8f3b;
             color: white;
             border: none;
@@ -36,10 +36,19 @@ if (count($matchs) > 0) {
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            margin: 2px;
+        }
+
+        .btn-evaluer {
+            background-color: #2c3e50;
         }
 
         .btn-enregistrer:hover {
             background-color: #145a2a;
+        }
+
+        .btn-evaluer:hover {
+            background-color: #1a252f;
         }
     </style>
 

@@ -85,7 +85,7 @@ if (!empty($licence)) {
 </head>
 <body>
 <div class="top-left">
-    <a href="homePage.php" class="button">Retour</a>
+    <a href="index.php" class="button">Retour</a>
 </div>
 <form method="post" action="modifier_joueur.php?licence=<?php echo urlencode($licence); ?>">
     <h1>Modification de Joueur</h1>
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($req) {
             echo "Le joueur a été modifié avec succès.";
-            header('Location: homePage.php');
+            header('Location: index.php');
         } else {
             echo "Aucune modification effectuée.";
         }

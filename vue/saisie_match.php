@@ -173,7 +173,7 @@ require_once 'session/session_timeout.php';
     </style>
 </head>
 <body>
-<a href="homePage.php" class="back-button">Retour</a>
+<a href="index.php" class="back-button">Retour</a>
 
 <div class="container">
     <h1>Saisie d'un match</h1>

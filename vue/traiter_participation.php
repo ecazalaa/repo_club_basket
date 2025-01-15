@@ -6,6 +6,7 @@ require_once '../modele/Participer.php';
 require_once '../controleur/CreerParticipation.php';
 require_once '../controleur/RechercheParticipation2.php';
 require_once '../controleur/ModifierParticipation.php';
+require_once '../controleur/SupprimerParticipation.php';
 
 // Stocker les messages dans un tableau
 $messages = [];
@@ -20,14 +21,22 @@ foreach ($positions as $licence => $position) {
     $existingParticipation = $rechercheParticipation->executer();
 
     if ($existingParticipation) {
-        if (isset($existingParticipation['poste']) && $existingParticipation['poste'] != $position) {
+        if (isset($existingParticipation['poste']) && $existingParticipation['poste'] != $position && $position != null) {
             $participer = new Participer($licence, $matchId, $tituRemp, $position, null);
             $modifierParticipation = new ModifierParticipation($participer);
             $modifierParticipation->executer();
             $messages[] = "Participation mise à jour pour le joueur ID: $licence";
             $modificationsApportees = true;
         }
-    } else {
+        if($position==null){
+            $suppression= new SupprimerParticipation();
+            $suppression->executer($licence, $matchId);
+            $messages[] = "Le joueur d'ID: $licence a été supprimé de la participation car il n'as plus de poste";
+            $modificationsApportees = true;
+        }
+    }
+
+    else {
         if ($position != null) {
             $participer = new Participer($licence, $matchId, $tituRemp, $position, null);
             $creerParticipation = new CreerParticipation($participer);
@@ -178,7 +187,7 @@ if ($modificationsApportees) {
             <?php endif; ?>
 
             <div class="button-container">
-                <button onclick="window.location.href='HomePage.php'" class="button">
+                <button onclick="window.location.href='index.php'" class="button">
                     Retour à la page d'accueil
                 </button>
             </div>
