@@ -6,7 +6,6 @@ require_once '../modele/JoueurDAO.php';
 class ModifierStatutJoueur{
     private $joueurDAO;
     private $licence;
-
     private $statut;
 
     public function __construct($licence, $statut)

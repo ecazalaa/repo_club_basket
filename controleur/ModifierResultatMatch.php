@@ -8,6 +8,7 @@ class ModifierResultatMatch{
     private $id;
     private $resultat;
 
+    // Constructeur : Initialise la connexion PDO et le match à modifier
     public function __construct($id, $resultat)
     {
         $pdo = connectionBD();
@@ -16,6 +17,7 @@ class ModifierResultatMatch{
         $this->resultat = $resultat;
     }
 
+    // Exécute la modification du résultat du match
     public function executer(){
         return $this->matchDAO->updateResultat($this->id, $this->resultat);
     }

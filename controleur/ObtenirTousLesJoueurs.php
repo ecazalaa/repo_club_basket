@@ -7,12 +7,14 @@ class ObtenirTousLesJoueurs
 {
     private $joueurDAO;
 
+    // Constructeur : Initialise la connexion PDO
     public function __construct()
     {
         $pdo = connectionBD();
         $this->joueurDAO = new JoueurDAO($pdo);
     }
 
+    // Retourne tous les joueurs
     public function executer()
     {
         return $this->joueurDAO->selectAll();
