@@ -16,8 +16,7 @@ Prénom : admin
 
 Mot de passe : admin
 
-Accès au compte alwaysData :
 
-email : emile.cazalaa@etu.iut-tlse3.fr
 
-Mdp : 
+SCRIPT SQL de Création de la bd :
+
